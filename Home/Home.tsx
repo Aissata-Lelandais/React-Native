@@ -2,13 +2,14 @@ import * as React from "react";
 import {
   StyleSheet,
   Text,
-  View,
-  SafeAreaView,
-  SectionList,
   StatusBar,
   FlatList,
+  View,
+  SafeAreaView,
 } from "react-native";
-import { NavigationContainer } from "@react-navigation/native";
+import { Icon } from "react-native-elements";
+
+import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 class Home extends React.Component {
@@ -33,44 +34,58 @@ class Home extends React.Component {
   render() {
     console.log("this.state", this.state);
     return (
-      <NavigationContainer>
-        <Text style={styles.header}>BicloFiinder</Text>
+      <SafeAreaView>
+        <View>
+          <Text style={styles.header}>BicloFinder</Text>
+          <Icon style={styles.icon} name="search" color="white" />
+        </View>
         <FlatList
           data={this.state.data}
           renderItem={({ item }) => (
             <Text style={styles.container}>
               <Text style={styles.name}>{item.name}</Text>
-              {/* <Text style={styles.name}>{item.address}</Text>
-              <Text style={styles.name}>{item.bike_stands}</Text>
-              <Text style={styles.name}>{item.available_bike_stands}</Text>
-              <Text style={styles.name}>{item.available_bikes}</Text> */}
+              <Text style={styles.adress}>{item.address}</Text>
+              <Text style={styles.stand}>{item.bike_stands}</Text>
+              <Text style={styles.bikest}>{item.available_bike_stands}</Text>
+              <Text style={styles.avaibikes}>{item.available_bikes}</Text>
             </Text>
           )}
         />
-      </NavigationContainer>
+      </SafeAreaView>
     );
   }
 }
 const styles = StyleSheet.create({
   name: {
-    backgroundColor: "#f9c2ff",
+    display: "flex",
+    marginTop: 10,
     height: 150,
     justifyContent: "center",
-    marginVertical: 8,
-    marginHorizontal: 16,
     padding: 20,
+    textAlign: "center",
+    paddingTop: StatusBar.currentHeight,
+  },
+  icon: {
+    display: "flex",
   },
   header: {
-    fontSize: 20,
+    fontSize: 35,
     backgroundColor: "blue",
+    justifyContent: "center",
+    color: "white",
   },
   title: {
     fontSize: 24,
   },
-  container: {
-    flex: 1,
-    marginTop: StatusBar.currentHeight,
+  container: {},
+  adress: {
+    flex: 2,
+    backgroundColor: "yellow",
+    textAlign: "center",
   },
+  stand: {},
+  bikest: {},
+  avaibikes: {},
 });
 
 export default Home;
